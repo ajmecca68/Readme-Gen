@@ -27,6 +27,16 @@ const questions = [
         name: 'license',
         message: 'Choose an open-source license for your project:',
         choices: ['MIT', 'GPL-3.0', 'Apache-2.0', 'BSD-3-Clause', 'None']
+    },
+    {
+        type: 'input',
+        name: 'github',
+        message: 'What is your GITHUB username?'
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'What is your email?'
     }
 ];
 
@@ -65,13 +75,31 @@ function generateLicense(license) {
     }
 }
 
+function generateTableOfContents() {
+    let sections = [
+        "Description",
+        "Installation",
+        "Usage",
+        "License",
+        "Questions"
+    ];
+
+    return `
+## Table of Contents
+${sections.map(section => `- [${section}](#${section.toLowerCase()})`).join('\n')}
+`;
+}
+
 function generateReadme(answers) {
     const licenseInfo = generateLicense(answers.license);
+    const tableOfContents = generateTableOfContents();
 
     return `
 # ${answers.title}
 
 ${licenseInfo.badge}
+
+${tableOfContents}
 
 ## Description
 ${answers.description}
@@ -84,6 +112,10 @@ ${answers.usage}
 
 ## License
 ${licenseInfo.text}
+
+## Questions
+GITHUB: https://github.com/${answers.github}
+EMAIL: [${answers.email}](mailto:${answers.email})
 `;
 }
 
