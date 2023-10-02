@@ -1,3 +1,4 @@
+
 # Automatic Readme Generator
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
@@ -9,6 +10,7 @@
 - [Usage](#usage)
 - [License](#license)
 - [Questions](#questions)
+- [Tests](#tests)
 
 
 ## Description
@@ -27,3 +29,7 @@ This project is licensed under the MIT License.
 GITHUB: https://github.com/ajmecca68
 EMAIL: [amecca1968@gmail.com](mailto:amecca1968@gmail.com)
 SCREENCASTIFY: https://drive.google.com/file/d/1IKdsPGbJKZhUYg2RRDRKw7VWiGDn3Ach/view
+
+## Tests
+Run a test? Just type "node test.js" in the command line.
+it will generate a TEST_README.md file.

@@ -15,11 +15,16 @@ const questions = [
     {
         type: 'input',
         name: 'installation',
-        message: 'What are the steps required to install your project:'
+        message: 'What are the steps required to install your project?'
     },
     {
         type: 'input',
         name: 'usage',
+        message: 'How do you use the application?'
+    },
+    {
+        type: 'input',
+        name: 'contributing',
         message: 'List your collaborators:'
     },
     {
@@ -81,7 +86,8 @@ function generateTableOfContents() {
         "Installation",
         "Usage",
         "License",
-        "Questions"
+        "Questions",
+        "Test"
     ];
 
     return `
@@ -99,10 +105,10 @@ function generateReadme(answers) {
 
 ${licenseInfo.badge}
 
-${tableOfContents}
-
 ## Description
 ${answers.description}
+
+${tableOfContents}
 
 ## Installation
 ${answers.installation}
@@ -110,17 +116,38 @@ ${answers.installation}
 ## Usage
 ${answers.usage}
 
+## Credits
+${answers.contributing}
+
 ## License
 ${licenseInfo.text}
 
 ## Questions
-GITHUB: https://github.com/${answers.github}
+GITHUB: https://github.com/${answers.github}\n
 EMAIL: [${answers.email}](mailto:${answers.email})
-`;
+
+## Tests
+Run a test? Just type "node test.js" in the command line.\nit will generate a TEST_README.md file.
+`
+;
 }
 
-inquirer.prompt(questions).then(answers => {
-    const readmeContent = generateReadme(answers);
-    fs.writeFileSync('README.md', readmeContent, 'utf-8');
-    console.log('README.md has been generated!');
-});
+function promptForAnswers() {
+    inquirer.prompt(questions).then(answers => {
+        const readmeContent = generateReadme(answers);
+        fs.writeFileSync('README.md', readmeContent, 'utf-8');
+        console.log('README.md has been generated!');
+    });
+}
+
+// Export the functions for usage in other files
+module.exports = {
+    generateReadme,
+    generateLicense,
+    promptForAnswers
+};
+
+// Check if the current file is being run directly
+if (require.main === module) {
+    promptForAnswers();  // Only run prompts if readme.js is being run directly
+}
